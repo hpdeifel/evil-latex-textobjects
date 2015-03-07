@@ -3,7 +3,11 @@
 ;; Copyright (C) 2015  Hans-Peter Deifel
 
 ;; Author: Hans-Peter Deifel <hpd@hpdeifel.de>
-;; Keywords: tex, wp, convenience
+;; Keywords: tex, wp, convenience, vi, evil
+;; Version: 1.0
+;; Package-Requires: ((evil 1.0) (auctex 11.88))
+
+;; This file is not part of GNU Emacs.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
