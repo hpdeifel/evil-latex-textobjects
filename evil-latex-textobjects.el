@@ -27,6 +27,7 @@
 ;;; Code:
 
 (require 'evil)
+(require 'latex)
 
 (evil-define-text-object evil-latex-textobjects-inner-dollar (count &optional beg end type)
   "Select inner dollar"
