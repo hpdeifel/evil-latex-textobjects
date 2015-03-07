@@ -101,6 +101,47 @@ If no such macro can be found, return nil"
             (cdr beg)))
      (t (list (cdr beg) (car end))))))
 
+(defun evil-latex-textobjects-env-beginning ()
+  "Return (start . end) of the \\begin{foo} to the left of point."
+  (let (beg)
+    (save-excursion
+      (LaTeX-find-matching-begin)       ; we are at backslash
+      (setq beg (point))
+      (skip-chars-forward "^{")         ; goto opening brace
+      (forward-sexp)                    ; goto closing brace
+      ;; Count the newline after \begin{foo} to the environment header
+      ;; Without this, delete-inner-env would unexpectedly move the end
+      ;; to the same line as the beginning
+      ;; (when (looking-at "[[:blank:]]*$")
+      ;;   (message "Newline")
+      ;;   (forward-line 1))
+      (cons beg (point)))))
+
+(defun evil-latex-textobjects-env-end ()
+  "Return (start . end) of the \\end{foo} to the right of point."
+  (let (end)
+    (save-excursion
+      (LaTeX-find-matching-end)         ; we are at closing brace
+      (setq end (point))
+      (backward-sexp)                   ; goto opening brace
+      (search-backward "\\")            ; goto backslash
+      (cons (point) end))))
+
+
+(evil-define-text-object evil-latex-textobjects-an-env (count &optional beg end type)
+  "Select a LaTeX environment"
+  :extend-selection nil
+  (let ((beg (evil-latex-textobjects-env-beginning))
+        (end (evil-latex-textobjects-env-end)))
+    (list (car beg) (cdr end))))
+
+(evil-define-text-object evil-latex-textobjects-inner-env (count &optional beg end type)
+  "Select a LaTeX environment"
+  :extend-selection nil
+  (let ((beg (evil-latex-textobjects-env-beginning))
+        (end (evil-latex-textobjects-env-end)))
+    (list (cdr beg) (car end))))
+
 ;; TODO Support environments
 
 ;; TODO Add minor mode and don't use the global maps
@@ -110,6 +151,8 @@ If no such macro can be found, return nil"
 (define-key evil-outer-text-objects-map "\\" 'evil-latex-textobjects-a-math)
 (define-key evil-outer-text-objects-map "m" 'evil-latex-textobjects-a-macro)
 (define-key evil-inner-text-objects-map "m" 'evil-latex-textobjects-inner-macro)
+(define-key evil-outer-text-objects-map "e" 'evil-latex-textobjects-an-env)
+(define-key evil-inner-text-objects-map "e" 'evil-latex-textobjects-inner-env)
 
 (provide 'evil-latex-textobjects)
 
