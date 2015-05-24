@@ -166,7 +166,7 @@ If no such macro can be found, return nil"
 (define-key evil-latex-textobjects-inner-map "e" 'evil-latex-textobjects-inner-env)
 
 ;;;###autoload
-(define-minor-mode evil-latex-textobjects
+(define-minor-mode evil-latex-textobjects-mode
   "Minor mode for latex-specific text objects in evil.
 
 Installs the following additional text objects:
@@ -178,11 +178,11 @@ Installs the following additional text objects:
   :keymap (make-sparse-keymap)
   (evil-normalize-keymaps))
 
-(evil-define-key 'operator evil-latex-textobjects-map
+(evil-define-key 'operator evil-latex-textobjects-mode-map
   "a" evil-latex-textobjects-outer-map
   "i" evil-latex-textobjects-inner-map)
 
-(evil-define-key 'visual evil-latex-textobjects-map
+(evil-define-key 'visual evil-latex-textobjects-mode-map
   "a" evil-latex-textobjects-outer-map
   "i" evil-latex-textobjects-inner-map)
 
