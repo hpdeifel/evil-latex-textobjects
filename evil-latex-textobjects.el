@@ -142,8 +142,6 @@ If no such macro can be found, return nil"
         (end (evil-latex-textobjects-env-end)))
     (list (cdr beg) (car end))))
 
-;; TODO Support environments
-
 ;; TODO Add minor mode and don't use the global maps
 (define-key evil-inner-text-objects-map "$" 'evil-latex-textobjects-inner-dollar)
 (define-key evil-outer-text-objects-map "$" 'evil-latex-textobjects-a-dollar)
@@ -156,4 +154,4 @@ If no such macro can be found, return nil"
 
 (provide 'evil-latex-textobjects)
 
-;; evil-latex-textobjects.el ends here
+;;; evil-latex-textobjects.el ends here
