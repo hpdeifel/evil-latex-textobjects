@@ -186,6 +186,16 @@ Installs the following additional text objects:
   "a" evil-latex-textobjects-outer-map
   "i" evil-latex-textobjects-inner-map)
 
+;;;###autoload
+(defun turn-on-evil-latex-textobjects ()
+  "Enable evil-latex-textobjects-mode in current buffer."
+  (evil-latex-textobjects-mode 1))
+
+;;;###autoload
+(defun turn-off-evil-latex-textobjects ()
+  "Disable evil-latex-textobjects-mode in current buffer."
+  (evil-latex-textobjects-mode -1))
+
 
 (provide 'evil-latex-textobjects)
 
