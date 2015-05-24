@@ -142,30 +142,42 @@ If no such macro can be found, return nil"
         (end (evil-latex-textobjects-env-end)))
     (list (cdr beg) (car end))))
 
-(defun evil-latex-textobjects-add-bindings ()
-  "Add latex specific text objects to evil."
-  (define-key evil-inner-text-objects-map "$" 'evil-latex-textobjects-inner-dollar)
-  (define-key evil-outer-text-objects-map "$" 'evil-latex-textobjects-a-dollar)
-  (define-key evil-inner-text-objects-map "\\" 'evil-latex-textobjects-inner-math)
-  (define-key evil-outer-text-objects-map "\\" 'evil-latex-textobjects-a-math)
-  (define-key evil-outer-text-objects-map "m" 'evil-latex-textobjects-a-macro)
-  (define-key evil-inner-text-objects-map "m" 'evil-latex-textobjects-inner-macro)
-  (define-key evil-outer-text-objects-map "e" 'evil-latex-textobjects-an-env)
-  (define-key evil-inner-text-objects-map "e" 'evil-latex-textobjects-inner-env))
+(defvar evil-latex-textobjects-outer-map (make-sparse-keymap))
+(defvar evil-latex-textobjects-inner-map (make-sparse-keymap))
+
+(set-keymap-parent evil-latex-textobjects-outer-map evil-outer-text-objects-map)
+(set-keymap-parent evil-latex-textobjects-inner-map evil-inner-text-objects-map)
+
+(define-key evil-latex-textobjects-inner-map "$" 'evil-latex-textobjects-inner-dollar)
+(define-key evil-latex-textobjects-outer-map "$" 'evil-latex-textobjects-a-dollar)
+(define-key evil-latex-textobjects-inner-map "\\" 'evil-latex-textobjects-inner-math)
+(define-key evil-latex-textobjects-outer-map "\\" 'evil-latex-textobjects-a-math)
+(define-key evil-latex-textobjects-outer-map "m" 'evil-latex-textobjects-a-macro)
+(define-key evil-latex-textobjects-inner-map "m" 'evil-latex-textobjects-inner-macro)
+(define-key evil-latex-textobjects-outer-map "e" 'evil-latex-textobjects-an-env)
+(define-key evil-latex-textobjects-inner-map "e" 'evil-latex-textobjects-inner-env)
 
 ;;;###autoload
-(defun evil-latex-textobjects-install ()
-  "Add latex specific text objects to evil."
-  (interactive "")
-  (evil-latex-textobjects-add-bindings))
+(define-minor-mode evil-latex-textobjects
+  "Minor mode for latex-specific text objects in evil.
 
-;;;###autoload
-(defun evil-latex-textobjects-install-locally ()
-  "Add latex specific text objects buffer locally to evil."
-  (interactive "")
-  (make-local-variable 'evil-outer-text-objects-map)
-  (make-local-variable 'evil-inner-text-objects-map)
-  (evil-latex-textobjects-add-bindings))
+Installs the following additional text objects:
+\\<evil-latex-textobjects-outer-map>
+  \\[evil-latex-textobjects-a-math]\tDisplay math\t\t\\=\\[ .. \\=\\]
+  \\[evil-latex-textobjects-a-dollar]\tInline math\t\t$ .. $
+  \\[evil-latex-textobjects-a-macro]\tTeX macro\t\t\\foo{..}
+  \\[evil-latex-textobjects-an-env]\tLaTeX environment\t\\begin{foo}..\\end{foo}"
+  :keymap (make-sparse-keymap)
+  (evil-normalize-keymaps))
+
+(evil-define-key 'operator evil-latex-textobjects-map
+  "a" evil-latex-textobjects-outer-map
+  "i" evil-latex-textobjects-inner-map)
+
+(evil-define-key 'visual evil-latex-textobjects-map
+  "a" evil-latex-textobjects-outer-map
+  "i" evil-latex-textobjects-inner-map)
+
 
 (provide 'evil-latex-textobjects)
 
