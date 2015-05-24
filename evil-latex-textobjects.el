@@ -31,6 +31,11 @@
 ;;;  $	Inline math		$ .. $
 ;;;  m	TeX macro		\foo{..}
 ;;;  e	LaTeX environment	\begin{foo}..\end{foo}
+;;;
+;;; To enable this mode in LaTeX buffers, add this to your init file:
+;;;
+;;; (require 'evil-latex-textobjects)
+;;; (add-hook 'latex-mode-hook 'turn-on-evil-latex-textobjects-mode)
 
 ;;; Code:
 
