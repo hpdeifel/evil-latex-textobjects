@@ -142,15 +142,30 @@ If no such macro can be found, return nil"
         (end (evil-latex-textobjects-env-end)))
     (list (cdr beg) (car end))))
 
-;; TODO Add minor mode and don't use the global maps
-(define-key evil-inner-text-objects-map "$" 'evil-latex-textobjects-inner-dollar)
-(define-key evil-outer-text-objects-map "$" 'evil-latex-textobjects-a-dollar)
-(define-key evil-inner-text-objects-map "\\" 'evil-latex-textobjects-inner-math)
-(define-key evil-outer-text-objects-map "\\" 'evil-latex-textobjects-a-math)
-(define-key evil-outer-text-objects-map "m" 'evil-latex-textobjects-a-macro)
-(define-key evil-inner-text-objects-map "m" 'evil-latex-textobjects-inner-macro)
-(define-key evil-outer-text-objects-map "e" 'evil-latex-textobjects-an-env)
-(define-key evil-inner-text-objects-map "e" 'evil-latex-textobjects-inner-env)
+(defun evil-latex-textobjects-add-bindings ()
+  "Add latex specific text objects to evil."
+  (define-key evil-inner-text-objects-map "$" 'evil-latex-textobjects-inner-dollar)
+  (define-key evil-outer-text-objects-map "$" 'evil-latex-textobjects-a-dollar)
+  (define-key evil-inner-text-objects-map "\\" 'evil-latex-textobjects-inner-math)
+  (define-key evil-outer-text-objects-map "\\" 'evil-latex-textobjects-a-math)
+  (define-key evil-outer-text-objects-map "m" 'evil-latex-textobjects-a-macro)
+  (define-key evil-inner-text-objects-map "m" 'evil-latex-textobjects-inner-macro)
+  (define-key evil-outer-text-objects-map "e" 'evil-latex-textobjects-an-env)
+  (define-key evil-inner-text-objects-map "e" 'evil-latex-textobjects-inner-env))
+
+;;;###autoload
+(defun evil-latex-textobjects-install ()
+  "Add latex specific text objects to evil."
+  (interactive "")
+  (evil-latex-textobjects-add-bindings))
+
+;;;###autoload
+(defun evil-latex-textobjects-install-locally ()
+  "Add latex specific text objects buffer locally to evil."
+  (interactive "")
+  (make-local-variable 'evil-outer-text-objects-map)
+  (make-local-variable 'evil-inner-text-objects-map)
+  (evil-latex-textobjects-add-bindings))
 
 (provide 'evil-latex-textobjects)
 
