@@ -23,6 +23,14 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
+;;;
+;;; Provides a minor mode that installs several additional LaTeX
+;;; specific text objects for evil-mode:
+;;; 
+;;;  \	Display math		\[ .. \]
+;;;  $	Inline math		$ .. $
+;;;  m	TeX macro		\foo{..}
+;;;  e	LaTeX environment	\begin{foo}..\end{foo}
 
 ;;; Code:
 
