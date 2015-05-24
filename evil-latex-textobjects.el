@@ -187,12 +187,12 @@ Installs the following additional text objects:
   "i" evil-latex-textobjects-inner-map)
 
 ;;;###autoload
-(defun turn-on-evil-latex-textobjects ()
+(defun turn-on-evil-latex-textobjects-mode ()
   "Enable evil-latex-textobjects-mode in current buffer."
   (evil-latex-textobjects-mode 1))
 
 ;;;###autoload
-(defun turn-off-evil-latex-textobjects ()
+(defun turn-off-evil-latex-textobjects-mode ()
   "Disable evil-latex-textobjects-mode in current buffer."
   (evil-latex-textobjects-mode -1))
 
