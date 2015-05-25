@@ -31,7 +31,7 @@
        (with-temp-buffer
          (set-window-buffer win (current-buffer) t)
          (turn-on-evil-mode)
-         (turn-on-evil-latex-textobjects)
+         (turn-on-evil-latex-textobjects-mode)
          (insert string)
          (goto-char (point-min))
          (execute-kbd-macro keys)
