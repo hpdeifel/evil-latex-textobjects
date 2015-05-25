@@ -60,6 +60,16 @@
   (should (equal (evil-latex-textobjects-on-str " \\[foo\\] " "lllda\\")
                  "  ")))
 
+(ert-deftest evil-latex-textobjects-visual-inner-math ()
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\[\\[foo\\]\\] " "ffvi\\i\\d")
+                 " \\[\\] ")))
+
+(ert-deftest evil-latex-textobjects-visual-a-math ()
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\[\\[foo\\]\\] " "ffva\\a\\d")
+                 "  ")))
+
 ;;; macro
 (ert-deftest evil-latex-textobjects-dimacro ()
   (should (equal (evil-latex-textobjects-on-str " \\foo{bar} " "llldim")
@@ -67,6 +77,16 @@
 
 (ert-deftest evil-latex-textobjects-damacro ()
   (should (equal (evil-latex-textobjects-on-str " \\foo{bar} " "llldam")
+                 "  ")))
+
+(ert-deftest evil-latex-textobjects-visual-inner-macro ()
+  :expected-result :failed
+  (should (equal (evil-latex-textobjects-on-str " \\bar{\\foo{baz}} " "2f{lvimimd")
+                 " \\bar{} ")))
+
+(ert-deftest evil-latex-textobjects-visual-a-macro ()
+  :expected-result :failed
+  (should (equal (evil-latex-textobjects-on-str " \\bar{\\foo{baz}} " "2f{lvamamd")
                  "  ")))
 
 ;;; environment
@@ -78,6 +98,26 @@
 (ert-deftest evil-latex-textobjects-daenv ()
   (should (equal (evil-latex-textobjects-on-str
                   " \\begin{foo}\n  bar\n\\end{foo} " "jdae")
+                 "  ")))
+
+(ert-deftest evil-latex-textobjects-visual-inner-env ()
+  :expected-result :failed
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\begin{bar}
+  \\begin{foo}
+    bar
+  \\end{foo}
+\\end{bar} " "jjvieied")
+                 " \\begin{bar}\\end{bar} ")))
+
+(ert-deftest evil-latex-textobjects-visual-a-env ()
+  :expected-result :failed
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\begin{bar}
+  \\begin{foo}
+    bar
+  \\end{foo}
+\\end{bar} " "jjvaeaed")
                  "  ")))
 
 ;;; end
