@@ -70,6 +70,16 @@
                   " \\[\\[foo\\]\\] " "ffva\\a\\d")
                  "  ")))
 
+(ert-deftest evil-latex-textobjects-inner-math-count ()
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\[\\[foo\\]\\] " "ffd2i\\")
+                 " \\[\\] ")))
+
+(ert-deftest evil-latex-textobjects-a-math-count ()
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\[\\[foo\\]\\] " "ffd2a\\")
+                 "  ")))
+
 ;;; macro
 (ert-deftest evil-latex-textobjects-dimacro ()
   (should (equal (evil-latex-textobjects-on-str " \\foo{bar} " "llldim")
@@ -87,6 +97,18 @@
 (ert-deftest evil-latex-textobjects-visual-a-macro ()
   :expected-result :failed
   (should (equal (evil-latex-textobjects-on-str " \\bar{\\foo{baz}} " "2f{lvamamd")
+                 "  ")))
+
+(ert-deftest evil-latex-textobjects-inner-macro-count ()
+  :expected-result :failed
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\bar{\\foo{baz}} " "2f{ld2im")
+                 " \\bar{} ")))
+
+(ert-deftest evil-latex-textobjects-a-macro-count ()
+  :expected-result :failed
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\bar{\\foo{baz}} " "2f{ld2am")
                  "  ")))
 
 ;;; environment
@@ -118,6 +140,26 @@
     bar
   \\end{foo}
 \\end{bar} " "jjvaeaed")
+                 "  ")))
+
+(ert-deftest evil-latex-textobjects-inner-env-count ()
+  :expected-result :failed
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\begin{bar}
+  \\begin{foo}
+    bar
+  \\end{foo}
+\\end{bar} " "jjd2ie")
+                 " \\begin{bar}\\end{bar} ")))
+
+(ert-deftest evil-latex-textobjects-a-env-count ()
+  :expected-result :failed
+  (should (equal (evil-latex-textobjects-on-str
+                  " \\begin{bar}
+  \\begin{foo}
+    bar
+  \\end{foo}
+\\end{bar} " "jjd2ae")
                  "  ")))
 
 ;;; end
