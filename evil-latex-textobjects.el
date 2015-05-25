@@ -35,7 +35,7 @@
 ;;; To enable this mode in LaTeX buffers, add this to your init file:
 ;;;
 ;;; (require 'evil-latex-textobjects)
-;;; (add-hook 'latex-mode-hook 'turn-on-evil-latex-textobjects-mode)
+;;; (add-hook 'LaTeX-mode-hook 'turn-on-evil-latex-textobjects-mode)
 
 ;;; Code:
 
