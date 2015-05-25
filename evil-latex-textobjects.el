@@ -194,11 +194,13 @@ Installs the following additional text objects:
 ;;;###autoload
 (defun turn-on-evil-latex-textobjects-mode ()
   "Enable evil-latex-textobjects-mode in current buffer."
+  (interactive "")
   (evil-latex-textobjects-mode 1))
 
 ;;;###autoload
 (defun turn-off-evil-latex-textobjects-mode ()
   "Disable evil-latex-textobjects-mode in current buffer."
+  (interactive "")
   (evil-latex-textobjects-mode -1))
 
 
