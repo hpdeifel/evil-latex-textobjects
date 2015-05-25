@@ -28,8 +28,8 @@ The following additional text objects are available:
 | e   | LaTeX environment \\begin{} \\end{} |
 
 All text objects come in *inner* and *outer* variants. For example, to
-delete the the whole surrounding environment, type <key>dae</key>. To
-delete only the part between `begin` and `end`, type <key>die</key>.
+delete the the whole surrounding environment, type <kbd>dae</kbd>. To
+delete only the part between `begin` and `end`, type <kbd>die</kbd>.
 
 The text objects
 ----------------
