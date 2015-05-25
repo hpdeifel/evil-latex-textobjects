@@ -5,7 +5,7 @@
 ;; Author: Hans-Peter Deifel <hpd@hpdeifel.de>
 ;; Keywords: tex, wp, convenience, vi, evil
 ;; Version: 1.0-git
-;; Package-Requires: ((evil 1.0) (auctex 11.88))
+;; Package-Requires: ((evil "1.0") (auctex "11.88"))
 
 ;; This file is not part of GNU Emacs.
 
