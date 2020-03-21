@@ -1,3 +1,8 @@
+Project Status
+==============
+
+This project is currently unmaintained.
+
 LaTeX text objects for evil
 ===========================
 
